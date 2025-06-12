@@ -6,6 +6,8 @@
 <title>TJZ - Digital Oasis Cafe</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2972/2972309.png" />
+<meta name="theme-color" content="#050b14" />
 
 <style>
   /* Reset & basics */
@@ -57,6 +59,35 @@
     main {
       display: block;
       padding-bottom: 160px;
+    }
+  }
+  @media (max-width: 900px) {
+    main.container {
+      display: block;
+      padding: 0 0 160px 0;
+    }
+    aside {
+      flex-direction: row;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    aside > section {
+      flex: 1 1 0;
+    }
+  }
+  @media (max-width: 600px) {
+    .header-container {
+      flex-direction: column;
+      gap: 12px;
+      padding: 12px 8px;
+    }
+    .hero {
+      padding: 80px 8px 40px;
+    }
+    .music-player {
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px 8px;
     }
   }
 
@@ -434,7 +465,7 @@
 </main>
 
 <!-- Music Player -->
-<div class="music-player" role="region" aria-label="Music player for ambient sounds">
+<div class="music-player" role="region" aria-label="Music player for ambient sounds" aria-live="polite">
   <button id="btn-play" aria-pressed="false" aria-label="เล่นเพลงบรรยากาศ">
     <span class="material-icons">play_arrow</span>
   </button>
@@ -450,15 +481,24 @@
   const audio = document.getElementById('ambient-audio');
   const btnPlay = document.getElementById('btn-play');
   const btnStop = document.getElementById('btn-stop');
+  const playIcon = btnPlay.querySelector('.material-icons');
 
   btnPlay.addEventListener('click', () => {
-    audio.play();
-    btnPlay.setAttribute('aria-pressed', 'true');
+    if (audio.paused) {
+      audio.play();
+      btnPlay.setAttribute('aria-pressed', 'true');
+      playIcon.textContent = 'pause';
+    } else {
+      audio.pause();
+      btnPlay.setAttribute('aria-pressed', 'false');
+      playIcon.textContent = 'play_arrow';
+    }
   });
   btnStop.addEventListener('click', () => {
     audio.pause();
     audio.currentTime = 0;
     btnPlay.setAttribute('aria-pressed', 'false');
+    playIcon.textContent = 'play_arrow';
   });
 
   // Accessibility: Keyboard focus visible handled by browser defaults
