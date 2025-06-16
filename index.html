@@ -1,509 +1,115 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>TJZ - Digital Oasis Cafe</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-<link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/2972/2972309.png" />
-<meta name="theme-color" content="#050b14" />
-
-<style>
-  /* Reset & basics */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
-  html, body {
-    height: 100%;
-    font-family: 'Inter', sans-serif;
-    background: radial-gradient(ellipse at center, #050b14 0%, #000000 90%);
-    color: #ddd;
-    overflow-x: hidden;
-  }
-
-  a {
-    color: #f4c06d; /* สีทองแดงอบอุ่น */
-    text-decoration: none;
-  }
-  a:hover,
-  a:focus {
-    text-decoration: underline;
-  }
-
-  /* Container */
-  .container {
-    max-width: 1200px;
-    padding: 0 24px;
-    margin: 0 auto;
-  }
-
-  /* Layout grid */
-  main {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    gap: 24px;
-    padding: 36px 0 100px;
-  }
-
-  /* Responsive grid for smaller screens */
-  @media (max-width:1024px) {
-    main {
-      grid-template-columns: 1fr 4fr;
-    }
-  }
-  @media (max-width:640px) {
-    main {
-      display: block;
-      padding-bottom: 160px;
-    }
-  }
-  @media (max-width: 900px) {
-    main.container {
-      display: block;
-      padding: 0 0 160px 0;
-    }
-    aside {
-      flex-direction: row;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    aside > section {
-      flex: 1 1 0;
-    }
-  }
-  @media (max-width: 600px) {
-    .header-container {
-      flex-direction: column;
-      gap: 12px;
-      padding: 12px 8px;
-    }
-    .hero {
-      padding: 80px 8px 40px;
-    }
-    .music-player {
-      flex-direction: column;
-      gap: 8px;
-      padding: 8px 8px;
-    }
-  }
-
-  /* Header */
-  header {
-    position: sticky;
-    top: 0;
-    background: rgba(4, 9, 20, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #332411;
-    z-index: 999;
-  }
-  .header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 24px;
-    max-width: 1200px;
-    margin: auto;
-  }
-  .logo {
-    font-weight: 700;
-    font-size: 1.8rem;
-    color: #f4c06d;
-    font-family: 'Inter', sans-serif;
-    letter-spacing: 2px;
-    user-select: none;
-  }
-
-  nav a {
-    margin-left: 20px;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-  nav a:first-child {
-    margin-left: 0;
-  }
-
-  /* Hero Section */
-  .hero {
-    position: relative;
-    color: #f0e8d0;
-    padding: 140px 24px 80px;
-    text-align: center;
-    background-image: url("https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/3322dfc8-20d4-49f0-ad46-8e3c3d39db50.png"); 
-    background-size: cover;
-    background-position: center;
-    border-radius: 16px;
-    box-shadow: 0 0 20px #f4c06d44;
-  }
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(0deg, rgba(0,0,0,0.8), transparent 40%);
-    border-radius: 16px;
-    pointer-events: none;
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .hero h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    text-shadow: 0 0 10px #f4c06d99;
-  }
-  .hero p {
-    font-size: 1.2rem;
-    margin-bottom: 32px;
-    color: #f0e8d0cc;
-  }
-
-  /* Ambient Sound Toggle Button */
-  .ambient-toggle {
-    background: #f4c06d;
-    color: #000;
-    font-weight: 700;
-    border: none;
-    border-radius: 30px;
-    padding: 0.6em 2em;
-    font-size: 1rem;
-    cursor: pointer;
-    box-shadow: 0 0 15px #f4c06d88;
-    transition: background-color 0.3s ease;
-  }
-  .ambient-toggle:hover,
-  .ambient-toggle:focus {
-    background-color: #d49e42;
-    outline: none;
-  }
-
-  /* Sidebar (Menu แนะนำ + บอร์ดประกาศ) */
-  aside {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-  }
-  .menu-box {
-    background: #121d2a;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 0 12px #f4c06d44;
-  }
-  .menu-box h2 {
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: #f4c06d;
-    border-bottom: 2px solid #f4c06d;
-    padding-bottom: 6px;
-  }
-
-  .menu-list {
-    list-style: none;
-  }
-  .menu-list li {
-    padding: 8px 0;
-    border-bottom: 1px solid #383838;
-  }
-  .menu-list li:last-child {
-    border: none;
-  }
-  .menu-list li a {
-    color: #eee;
-    font-weight: 500;
-    font-size: 1rem;
-  }
-
-  /* Main content (Blog / โต๊ะหนังสือ) */
-  section#blog {
-    background: #121d2a;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 0 18px #f4c06d44;
-  }
-  #blog h2 {
-    font-weight: 700;
-    color: #f4c06d;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #f4c06d;
-    padding-bottom: 8px;
-  }
-
-  /* Blog cards grid */
-  .blog-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
-    gap: 24px;
-  }
-
-  /* Card */
-  .card {
-    background: #1c293a;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(244,192,109,0.35);
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-  }
-  .card:hover,
-  .card:focus-within {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 24px rgba(244,192,109,0.7);
-  }
-  .card img {
-    border-radius: 8px;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-    margin-bottom: 12px;
-    filter: brightness(0.9);
-  }
-  .card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: #f4c06d;
-  }
-  .card p {
-    flex-grow: 1;
-    color: #ddd;
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-  .card .tag {
-    margin-top: 8px;
-    color: #ddb25e;
-    font-weight: 600;
-    font-size: 0.85rem;
-  }
-
-  /* About Me / Contact */
-  section#about {
-    background: #121d2a;
-    border-radius: 16px;
-    padding: 24px;
-    box-shadow: 0 0 18px #f4c06d44;
-  }
-  section#about h2 {
-    font-weight: 700;
-    color: #f4c06d;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #f4c06d;
-    padding-bottom: 8px;
-  }
-  #about p {
-    margin-bottom: 16px;
-    font-size: 1rem;
-    color: #eee;
-    line-height: 1.5;
-  }
-  .contact-links a {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-right: 16px;
-    border: 1px solid #ddb25e;
-    padding: 8px 12px;
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: #ddb25e;
-    transition: background-color 0.3s ease;
-  }
-  .contact-links a:hover,
-  .contact-links a:focus {
-    background-color: #ddb25e;
-    color: #121d2a;
-  }
-  .material-icons.md-18 {
-    font-size: 18px;
-  }
-
-  /* Music Player */
-  .music-player {
-    position: fixed;
-    bottom: 16px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #121d2a;
-    border: 1px solid #ddb25e;
-    box-shadow: 0 0 12px #ddb25e88;
-    border-radius: 24px;
-    padding: 8px 20px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    z-index: 1000;
-  }
-  .music-player button {
-    background: none;
-    border: none;
-    color: #ddb25e;
-    cursor: pointer;
-    font-size: 1.6rem;
-  }
-  .music-player button:focus {
-    outline: 2px solid #ddb25e;
-    outline-offset: 3px;
-  }
-  .music-player audio {
-    display: none;
-  }
-  
-  /* Scrollbar styling - subtle warm color */
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
-  ::-webkit-scrollbar-track {
-    background: #0a111c;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #ddb25e;
-    border-radius: 6px;
-    border: 3px solid #0a111c;
-  }
-
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ร้านกาแฟฮีลใจ - Coffee Healing Cafe</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-
 <header>
-  <div class="header-container" role="banner">
-    <div class="logo" aria-label="TJZ Digital Oasis Cafe">TJZ</div>
-    <nav aria-label="Primary navigation">
-      <a href="#hero">หน้าแรก</a>
-      <a href="#blog">บทความ</a>
-      <a href="#about">เกี่ยวกับฉัน</a>
-    </nav>
-  </div>
+  <div class="logo" aria-label="ร้านกาแฟฮีลใจ - Coffee Healing Cafe">ร้านกาแฟฮีลใจ</div>
+  <nav aria-label="เมนูนำทางหลัก">
+    <button class="active" data-section="hero" aria-current="page">หน้าแรก</button>
+    <button data-section="about">เกี่ยวกับฉัน</button>
+    <button data-section="coffees">ผลงาน</button>
+    <button data-section="chat">โต๊ะว่างคุยกัน</button>
+    <button data-section="barista">บาริสต้า</button>
+    <button data-section="bookshelf">ชั้นวางหนังสือ</button>
+    <button data-section="contact">ติดต่อ</button>
+  </nav>
 </header>
 
-<main class="container">
+<main>
+  <section id="hero" tabindex="-1" aria-label="บรรยากาศร้านกาแฟอบอุ่น" class="active-section hero">
+    <div class="hero-content">
+      <h1>ยินดีต้อนรับสู่ร้านกาแฟฮีลใจ</h1>
+      <p>พื้นที่แบ่งปันผลงาน ประสบการณ์ และรับฟังทุกความรู้สึกของคุณ</p>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2017/01/06/19/15/coffee-1958233_1280.png" alt="ไอน้ำกาแฟ" class="coffee-steam" width="120">
+  </section>
 
-  <!-- Sidebar Left -->
-  <aside aria-label="Sidebar with recommended menu and announcements">
-    <section class="menu-box" aria-labelledby="today-menu-heading">
-      <h2 id="today-menu-heading">เมนูแนะนำวันนี้</h2>
-      <ul class="menu-list" role="list">
-        <li><a href="#article1">เติมพลังด้วยกาแฟแก้วโปรด</a></li>
-        <li><a href="#article2">เทคนิคสมาธิสำหรับการทำงาน</a></li>
-        <li><a href="#article3">แรงบันดาลใจจากสายฝนเมื่อค่ำคืน</a></li>
-      </ul>
-    </section>
+  <section id="about" tabindex="-1" aria-label="เกี่ยวกับฉัน" class="about-section" hidden>
+    <h2>เกี่ยวกับฉัน</h2>
+    <p>สวัสดีครับ ผมชื่อสมชาย เป็นนักพัฒนาเว็บและนักเล่าเรื่องราวที่ชอบแบ่งปันประสบการณ์ชีวิตผ่านกาแฟและบทสนทนา หวังว่าพื้นที่นี้จะช่วยฮีลใจและสร้างแรงบันดาลใจให้กับทุกคนที่แวะมาเยี่ยมชม</p>
+    <ul>
+      <li>ประสบการณ์: Frontend Developer, UX/UI Designer</li>
+      <li>ความสนใจ: การออกแบบ, Mindfulness, การอ่านหนังสือ</li>
+    </ul>
+  </section>
 
-    <section class="menu-box" aria-labelledby="announcement-heading">
-      <h2 id="announcement-heading">บอร์ดประกาศ</h2>
-      <ul class="menu-list" role="list">
-        <li>เตรียมออกบทความใหม่สัปดาห์หน้า!</li>
-        <li>ขอบคุณผู้ติดตามทุกคนครับ 🙏</li>
-        <li>แนะนำเพลง Lo-Fi ใหม่ในเพลย์ลิสต์</li>
-      </ul>
-    </section>
-  </aside>
+  <section id="coffees" tabindex="-1" aria-label="ผลงาน" class="menu-coffees" hidden>
+    <h2>ผลงานของฉัน</h2>
+    <div class="menu-items" role="list">
+      <div class="menu-item" role="listitem" tabindex="0" data-key="project1">
+        <h3>Web Portfolio</h3>
+        <p>เว็บไซต์แนะนำตัวเองและผลงาน (React, TailwindCSS)</p>
+        <a href="https://your-portfolio-link.com" target="_blank">ดูผลงาน</a>
+      </div>
+      <div class="menu-item" role="listitem" tabindex="0" data-key="project2">
+        <h3>Healing Blog</h3>
+        <p>บล็อกแบ่งปันเรื่องราวและข้อคิดดี ๆ</p>
+        <a href="https://your-blog-link.com" target="_blank">อ่านบล็อก</a>
+      </div>
+    </div>
+    <article class="coffee-detail" aria-live="polite" aria-atomic="true">
+      <p>คลิกที่ผลงานเพื่อดูรายละเอียด</p>
+    </article>
+  </section>
 
+  <section id="chat" tabindex="-1" aria-label="พื้นที่โต๊ะว่างสำหรับพูดคุย" class="chat-section" hidden>
+    <h2>โต๊ะว่างคุยกัน</h2>
+    <div class="chat-window" id="chatWindow"></div>
+    <form id="chatForm" class="chat-input-container" autocomplete="off">
+      <input type="text" id="chatInput" class="chat-input" placeholder="พิมพ์ข้อความ..." aria-label="พิมพ์ข้อความ" required>
+      <button type="submit" class="chat-send-button">ส่ง</button>
+      <button type="button" id="clearChat" style="margin-left:1rem;">ลบข้อความทั้งหมด</button>
+    </form>
+    <div id="typingIndicator" aria-live="polite" style="margin-top:0.5rem;"></div>
+  </section>
 
-  <!-- Main Section -->
-  <section id="blog" aria-label="ส่วนบทความและบล็อก">
-    <h2>โต๊ะหนังสือ</h2>
-    <div class="blog-cards">
-
-      <article tabindex="0" class="card" id="article1" aria-labelledby="art1-title" aria-describedby="art1-desc">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/0092bead-f8c0-4dd4-b194-9fd72c221222.png" alt="ถ้วยกาแฟร้อนวางบนโต๊ะไม้" />
-        <h3 id="art1-title">เติมพลังด้วยกาแฟแก้วโปรด</h3>
-        <p id="art1-desc">วิธีการชงกาแฟให้ได้กลิ่นหอมและรสชาติที่ลงตัวในทุกเช้า</p>
-        <div class="tag">Brewing Thoughts</div>
-      </article>
-
-      <article tabindex="0" class="card" id="article2" aria-labelledby="art2-title" aria-describedby="art2-desc">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/ee1af83e-c600-42ed-9078-e8adc4cedae0.png" alt="มือกำลังจดโน้ตและจิบกาแฟ" />
-        <h3 id="art2-title">เทคนิคสมาธิสำหรับการทำงาน</h3>
-        <p id="art2-desc">วิธีการจัดการความคิดและโฟกัสเพื่อให้ประสิทธิภาพในการทำงานเพิ่มขึ้น</p>
-        <div class="tag">Recipe for Success</div>
-      </article>
-
-      <article tabindex="0" class="card" id="article3" aria-labelledby="art3-title" aria-describedby="art3-desc">
-        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/03cc531a-8153-47ac-ae85-29d3fc266b29.png" alt="ภาพสายฝนตกเบาๆ กระทบกระจกหน้าต่าง" />
-        <h3 id="art3-title">แรงบันดาลใจจากสายฝนเมื่อค่ำคืน</h3>
-        <p id="art3-desc">บทความสะท้อนความคิดผ่อนคลายจากธรรมชาติและคืนที่เปียกชื้น</p>
-        <div class="tag">Journey Log</div>
-      </article>
-
+  <section id="barista" tabindex="-1" aria-label="บาริสต้าประจำร้าน" class="barista-profile" hidden>
+    <div class="barista-photo">
+      <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295394_1280.png" alt="Barista" width="120">
+    </div>
+    <div class="barista-info">
+      <h2>บาริสต้าสมชาย</h2>
+      <p>พร้อมรับฟังและแบ่งปันเรื่องราวดี ๆ กับทุกคน</p>
     </div>
   </section>
 
-
-  <!-- Sidebar Right -->
-  <aside aria-label="About Me and Contact Information" style="display: flex; flex-direction: column; gap: 32px;">
-    <section id="about" tabindex="0" aria-labelledby="about-heading">
-      <h2 id="about-heading">บาร์กาแฟของ TJZ</h2>
-      <p>สวัสดีครับ! ผม TJZ บาริสต้าแห่ง Digital Oasis Cafe ชอบสร้างสรรค์งานด้าน IT และแบ่งปันแรงบันดาลใจในบรรยากาศคาเฟ่ที่อบอุ่นและสงบเงียบ</p>
-      <p>ผมชอบกาแฟ สายฝน และดนตรีชิล ๆ ลองฟังเรื่องราวของผมในนี้ พร้อมติดต่อพูดคุยกันได้เลยครับ!</p>
-
-      <div class="contact-links" role="list">
-        <a href="mailto:tjz@example.com" role="listitem" aria-label="ส่งอีเมลถึง TJZ">
-          <span class="material-icons md-18" aria-hidden="true">email</span> tjz@example.com
-        </a>
-        <a href="https://github.com/tjz" target="_blank" role="listitem" aria-label="ดูโปรเจคที่ GitHub">
-          <span class="material-icons md-18" aria-hidden="true">code</span> GitHub
-        </a>
-        <a href="https://twitter.com/tjz" target="_blank" role="listitem" aria-label="ติดตาม Twitter">
-          <span class="material-icons md-18" aria-hidden="true">chat</span> Twitter
-        </a>
+  <section id="bookshelf" tabindex="-1" aria-label="ชั้นวางหนังสือบำบัดใจ" class="bookshelf" hidden>
+    <h2>ชั้นวางหนังสือบำบัดใจ</h2>
+    <div class="books-grid">
+      <div class="book-card">
+        <div class="book-image"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794" alt="หนังสือ 1" width="80"></div>
+        <div class="book-title">Atomic Habits</div>
+        <div class="book-author">James Clear</div>
       </div>
-    </section>
-  </aside>
+      <div class="book-card">
+        <div class="book-image"><img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4" alt="หนังสือ 2" width="80"></div>
+        <div class="book-title">The Power of Now</div>
+        <div class="book-author">Eckhart Tolle</div>
+      </div>
+      <div class="book-card">
+        <div class="book-image"><img src="https://images.unsplash.com/photo-1464983953574-0892a716854b" alt="หนังสือ 3" width="80"></div>
+        <div class="book-title">Man's Search for Meaning</div>
+        <div class="book-author">Viktor Frankl</div>
+      </div>
+    </div>
+  </section>
 
+  <section id="contact" tabindex="-1" aria-label="ติดต่อ" class="contact-section" hidden>
+    <h2>ติดต่อ</h2>
+    <p>อีเมล: <a href="mailto:yourmail@email.com">yourmail@email.com</a></p>
+    <p>Facebook: <a href="https://facebook.com/yourprofile" target="_blank">facebook.com/yourprofile</a></p>
+    <p>LinkedIn: <a href="https://linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+  </section>
 </main>
 
-<!-- Music Player -->
-<div class="music-player" role="region" aria-label="Music player for ambient sounds" aria-live="polite">
-  <button id="btn-play" aria-pressed="false" aria-label="เล่นเพลงบรรยากาศ">
-    <span class="material-icons">play_arrow</span>
-  </button>
-  <button id="btn-stop" aria-label="หยุดเพลงบรรยากาศ">
-    <span class="material-icons">stop</span>
-  </button>
-  <span>เพลงประจำคาเฟ่: Lo-fi Chill Beats</span>
-  <audio id="ambient-audio" loop preload="auto" src="https://cdn.pixabay.com/download/audio/2022/03/21/audio_0d8468c356.mp3?filename=lofi-chill-ambient-8680.mp3"></audio>
-</div>
-
-<script>
-  // Ambient audio controls
-  const audio = document.getElementById('ambient-audio');
-  const btnPlay = document.getElementById('btn-play');
-  const btnStop = document.getElementById('btn-stop');
-  const playIcon = btnPlay.querySelector('.material-icons');
-
-  btnPlay.addEventListener('click', () => {
-    if (audio.paused) {
-      audio.play();
-      btnPlay.setAttribute('aria-pressed', 'true');
-      playIcon.textContent = 'pause';
-    } else {
-      audio.pause();
-      btnPlay.setAttribute('aria-pressed', 'false');
-      playIcon.textContent = 'play_arrow';
-    }
-  });
-  btnStop.addEventListener('click', () => {
-    audio.pause();
-    audio.currentTime = 0;
-    btnPlay.setAttribute('aria-pressed', 'false');
-    playIcon.textContent = 'play_arrow';
-  });
-
-  // Accessibility: Keyboard focus visible handled by browser defaults
-</script>
-
+<footer>
+  © 2024 ร้านกาแฟฮีลใจ - สร้างด้วยความรักและความผ่อนคลาย
+</footer>
+<script src="script.js"></script>
 </body>
 </html>
-
